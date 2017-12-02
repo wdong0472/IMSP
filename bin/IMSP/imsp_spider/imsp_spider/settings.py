@@ -88,3 +88,29 @@ ROBOTSTXT_OBEY = False
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+
+# 指定用来处理数据的 Pipeline 类，后面的数字代表执行顺序,取值范围是  0-1000 range.
+# 数值小的 Pipeline 类优先执行
+ITEM_PIPELINES = {
+    'imsp_spider.pipelines.miit_pipeline.MiitPipeline': 200,
+}
+
+
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_DB = "miit"
+MONGODB_COLLECTION = "docs"
+
+
+# 要保存的字段，即在 Item 类中的字段名为 image_url
+IMAGES_URLS_FIELD = 'image_url'
+
+import os
+# 配置数据保存路径，为当前工程目录下的 images 目录中
+project_dir = os.path.abspath(os.path.dirname(__file__))
+IMAGES_STORE = os.path.join(project_dir, 'images')
+
+# 设置图片的最大最小值
+# IMAGES_MIN_HEIGHT = 100
+# IMAGES_MIN_WIDTH = 100
